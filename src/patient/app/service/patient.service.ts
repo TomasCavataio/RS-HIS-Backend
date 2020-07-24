@@ -16,4 +16,8 @@ export class PatientService {
     async getPatient(id: string): Promise<Patient[]> {
         return await this.patientModel.findById(id);
     }
+
+    async deletePatient(id: string): Promise<Patient[]> {
+        return await this.patientModel.findByIdAndDelete(id);
+    }
 }
