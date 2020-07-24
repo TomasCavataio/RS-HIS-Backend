@@ -1,7 +1,8 @@
-import { Controller, Get, Req, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Req, Param, Delete, Post, Body } from '@nestjs/common';
 import { PatientService } from '../app/service/patient.service';
 import { Patient } from '../domain/models/patient.interface';
 import { ApiTags } from '@nestjs/swagger'
+import { CreatePatientDto } from '../domain/dto/create-patient-dto';
 
 
 @ApiTags('Patients')
@@ -23,5 +24,10 @@ export class PatientController {
     @Delete('/:id')
     deletePatient(@Param('id') id: string): Promise<Patient[]> {
         return this.patientService.deletePatient(id);
+    }
+
+    @Post()
+    createPatient(@Body() patientDto: CreatePatientDto): Promise<Patient> {
+        return this.patientService.createPatient(patientDto);
     }
 }

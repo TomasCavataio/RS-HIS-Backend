@@ -1,7 +1,9 @@
-import { Controller, Get, Req, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Req, Param, Delete, Post, Body } from '@nestjs/common';
 import { Professional } from '../domain/models/professional.interface';
 import { ProfessionalService } from '../app/service/professional.service';
 import { ApiTags } from '@nestjs/swagger'
+import { create } from 'domain';
+import { CreateProfessionalDto } from '../domain/dto/create-professional-dto';
 
 
 @ApiTags('Professionals')
@@ -22,7 +24,13 @@ export class ProfessionalController {
     }
 
     @Delete('/:id')
-    deletePatient(@Param('id') id: string): Promise<Professional> {
+    deleteProfessional(@Param('id') id: string): Promise<Professional> {
         return this.professionalService.deleteProfessional(id);
     }
+
+    @Post()
+    createProfessional(@Body() professionalDto: CreateProfessionalDto): Promise<Professional> {
+        return this.professionalService.createProfessional(professionalDto);
+    }
+
 }

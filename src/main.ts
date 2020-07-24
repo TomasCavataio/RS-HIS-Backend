@@ -8,8 +8,8 @@ async function bootstrap() {
   app.enableCors();
 
   const options = new DocumentBuilder()
-    .setTitle('Api Documentation')
-    .setDescription('HIS System')
+    .setTitle('RS-HIS Documentation')
+    .setDescription('Web Services Available')
     .setVersion('1.0')
     .build()
 

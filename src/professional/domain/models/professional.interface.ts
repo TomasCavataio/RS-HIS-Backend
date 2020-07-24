@@ -10,8 +10,8 @@ export interface Professional {
     address: Address;
     userType: UserType;
     medicalBoardNumber: string;
-    professionalType: Proffessions;
+    professionalType: Professions;
 }
 
-type Proffessions = 'Doctor' | 'Nurse' | 'Administrative';
+export type Professions = 'Doctor' | 'Nurse' | 'Administrative';
 
