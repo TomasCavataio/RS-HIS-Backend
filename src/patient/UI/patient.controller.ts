@@ -1,8 +1,8 @@
-import { Controller, Get, Req, Param, Delete, Post, Body } from '@nestjs/common';
+import { Controller, Get, Req, Param, Delete, Post, Body, Put } from '@nestjs/common';
 import { PatientService } from '../app/service/patient.service';
 import { Patient } from '../domain/models/patient.interface';
 import { ApiTags } from '@nestjs/swagger'
-import { CreatePatientDto } from '../domain/dto/create-patient-dto';
+import { PatientDto } from '../domain/dto/patient-dto';
 
 
 @ApiTags('Patients')
@@ -27,7 +27,12 @@ export class PatientController {
     }
 
     @Post()
-    createPatient(@Body() patientDto: CreatePatientDto): Promise<Patient> {
+    createPatient(@Body() patientDto: PatientDto): Promise<Patient> {
         return this.patientService.createPatient(patientDto);
+    }
+
+    @Put('/:id')
+    updateProfessional(@Param('id') id: string, @Body() patientDto: PatientDto): Promise<Patient> {
+        return this.patientService.updatePatient(id, patientDto);
     }
 }

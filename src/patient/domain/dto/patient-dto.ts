@@ -1,7 +1,7 @@
 import { UserType, Gender, Address } from 'src/common/user-types.interface';
 import { Insurance } from 'src/patient/domain/models/patient.interface';
 
-export class CreatePatientDto {
+export class PatientDto {
     _id: string;
     userType: UserType;
     name: string;

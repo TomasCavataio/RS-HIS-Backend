@@ -2,7 +2,7 @@ import { Injectable, Get } from '@nestjs/common';
 import { Professional } from 'src/professional/domain/models/professional.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose'
-import { CreateProfessionalDto } from 'src/professional/domain/dto/create-professional-dto';
+import { ProfessionalDto } from 'src/professional/domain/dto/professional-dto';
 @Injectable()
 export class ProfessionalService {
 
@@ -21,9 +21,13 @@ export class ProfessionalService {
         return await this.professionalModel.findByIdAndDelete(id);
     }
 
-    async createProfessional(professionalDto: CreateProfessionalDto): Promise<Professional> {
+    async createProfessional(professionalDto: ProfessionalDto): Promise<Professional> {
         const professional = new this.professionalModel(professionalDto);
         return await professional.save();
+    }
+
+    async updateProfessional(id: string, professionalDto: ProfessionalDto): Promise<Professional> {
+        return await this.professionalModel.findByIdAndUpdate({ _id: id }, professionalDto);
     }
 }
 

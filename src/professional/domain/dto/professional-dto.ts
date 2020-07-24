@@ -1,7 +1,7 @@
 import { UserType, Gender, Address } from 'src/common/user-types.interface'
 import { Professions } from 'src/professional/domain/models/professional.interface'
 
-export class CreateProfessionalDto {
+export class ProfessionalDto {
     _id: string;
     userType: UserType;
     name: string;
