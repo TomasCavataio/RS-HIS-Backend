@@ -5,13 +5,15 @@ import { PatientModule } from './patient/patient.module';
 import { ProfessionalModule } from './professional/professional.module';
 import { CommonModule } from './common/common.module';
 import { MongooseModule } from '@nestjs/mongoose'
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     PatientModule,
     ProfessionalModule,
     CommonModule,
-    MongooseModule.forRoot('mongodb+srv://tomascavataio:tomas1998@cluster0.7dqzq.mongodb.net/his?retryWrites=true&w=majority')
+    MongooseModule.forRoot(`mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}?retryWrites=true&w=majority`)
   ],
   controllers: [AppController],
   providers: [AppService],
