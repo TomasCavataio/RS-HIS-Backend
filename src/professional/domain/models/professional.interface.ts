@@ -1,4 +1,4 @@
-import { Gender, UserType, Address } from 'src/common/user-types.interface';
+import { Gender, UserType, Address } from 'src/common/interfaces/user-types.interface';
 
 export interface Professional {
     name: string;

@@ -1,11 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import { AllExceptionsFilter } from './common/exceptions/exceptions-filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   const options = new DocumentBuilder()
     .setTitle('RS-HIS Documentation')

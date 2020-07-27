@@ -1,4 +1,4 @@
-import { UserType, Gender, Address } from 'src/common/user-types.interface'
+import { UserType, Gender, Address } from 'src/common/interfaces/user-types.interface'
 import { Professions } from 'src/professional/domain/models/professional.interface'
 
 export class ProfessionalDto {
