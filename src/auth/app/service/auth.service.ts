@@ -5,18 +5,19 @@ import { JwtService } from '@nestjs/jwt';
 import *  as  bcrypt from 'bcrypt';
 import { JwtPayLoad } from 'src/auth/domain/dto/payload-dto';
 import { User } from 'src/users/domain/models/user.interface';
+import { LoginResponse } from 'src/auth/domain/dto/login-response-dto';
 
 @Injectable()
 export class AuthService {
 
     constructor(private userService: UserService, private jwtService: JwtService) { };
 
-    async login(loginUserDto: LoginUserDto) {
+    async login(loginUserDto: LoginUserDto): Promise<LoginResponse> {
         let result = await this.userService.findByEmail(loginUserDto.email);
         return this.createJwtPayload(result);
     }
 
-    createJwtPayload(user) {
+    createJwtPayload(user): LoginResponse {
         let data = {
             email: user.email,
             id: user._id
