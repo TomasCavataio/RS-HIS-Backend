@@ -1,14 +1,14 @@
-import { Controller, Get, Req, Param, Delete, Post, Body, Put, UseFilters } from '@nestjs/common';
+import { Controller, Get, Req, Param, Delete, Post, Body, Put, UseGuards } from '@nestjs/common';
 import { Professional } from '../domain/models/professional.interface';
 import { ProfessionalService } from '../app/service/professional.service';
 import { ApiTags } from '@nestjs/swagger'
-import { create } from 'domain';
 import { ProfessionalDto } from '../domain/dto/professional-dto';
-import { AllExceptionsFilter } from 'src/common/exceptions/exceptions-filter';
+import { AuthGuard } from '@nestjs/passport';
 
 
 @ApiTags('Professionals')
 @Controller('/professionals')
+@UseGuards(AuthGuard())
 export class ProfessionalController {
 
     constructor(private professionalService: ProfessionalService) { }

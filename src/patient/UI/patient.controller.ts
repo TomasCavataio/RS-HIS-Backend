@@ -1,12 +1,13 @@
-import { Controller, Get, Req, Param, Delete, Post, Body, Put, Logger, HttpException, HttpStatus, UseFilters } from '@nestjs/common';
+import { Controller, Get, Req, Param, Delete, Post, Body, Put, UseGuards } from '@nestjs/common';
 import { PatientService } from '../app/service/patient.service';
 import { Patient } from '../domain/models/patient.interface';
 import { ApiTags } from '@nestjs/swagger'
 import { PatientDto } from '../domain/dto/patient-dto';
-import { AllExceptionsFilter } from 'src/common/exceptions/exceptions-filter';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Patients')
 @Controller('/patients')
+@UseGuards(AuthGuard())
 export class PatientController {
 
     constructor(private patientService: PatientService) { }
