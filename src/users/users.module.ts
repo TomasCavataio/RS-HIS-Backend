@@ -4,9 +4,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { userSchema } from './infrastructure/MongoDB/user.schema';
 import { PassportModule } from '@nestjs/passport';
 import { UserService } from './app/service/user.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forFeature([{ name: 'User', schema: userSchema }]),
     PassportModule.register({ defaultStrategy: 'jwt', session: false }),
   ],

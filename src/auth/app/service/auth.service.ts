@@ -14,10 +14,14 @@ export class AuthService {
 
     async login(loginUserDto: LoginUserDto): Promise<LoginResponse> {
         let result = await this.userService.findByEmail(loginUserDto.email);
+        if (!result) throw new NotFoundException();
+        let checkPass = await bcrypt.compare(loginUserDto.password, result.password);
+        if (!checkPass) throw new UnauthorizedException();
+
         return this.createJwtPayload(result);
     }
 
-    createJwtPayload(user): LoginResponse {
+    createJwtPayload(user: User): LoginResponse {
         let data = {
             email: user.email,
             id: user._id
@@ -32,5 +36,6 @@ export class AuthService {
     async validateUserByJwt(payload: JwtPayLoad): Promise<User> {
         let user = await this.userService.findByEmail(payload.email);
         if (user) return user;
+        throw new UnauthorizedException();
     }
 }

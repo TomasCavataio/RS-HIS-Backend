@@ -11,7 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private authService: AuthService) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: 'estaesmiphrassecreate'
+            secretOrKey: `${process.env.JWTKEY}`
         })
         Logger.log("Creando el jwtStrategy");
     }
