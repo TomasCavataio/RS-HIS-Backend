@@ -11,7 +11,7 @@ export class UserService {
     constructor(@InjectModel("User") private userModel: Model<User>) { }
 
 
-    async registerUser(registerUserDto: RegisterUserDto) {
+    async registerUser(registerUserDto: RegisterUserDto): Promise<void> {
 
         const UserRegister = new this.userModel(registerUserDto);
         const session = await UserRegister.db.startSession();
@@ -19,23 +19,22 @@ export class UserService {
         try {
             session.startTransaction();
             let pass = await bcrypt.hash(registerUserDto.password, 10);
-            let result = await this.userModel.create([{ "email": registerUserDto.email, "password": pass }], { session: session })
+            await this.userModel.create([{ "email": registerUserDto.email, "password": pass }], { session: session })
             await session.commitTransaction();
         } catch (error) {
-            Logger.error(error);
             await session.abortTransaction();
-            if (error.code === 11000) throw new ConflictException("Usuario duplicado");
+            if (error.code === 11000) throw new ConflictException("Duplicated User");
             throw new BadGatewayException();
         } finally {
             session.endSession();
         }
     }
 
-    async findByEmail(email) {
+    async findByEmail(email: string): Promise<User> {
         return this.userModel.findOne({ email: email });
     }
 
-    async getAllUsers() {
+    async getAllUsers(): Promise<User[]> {
         return await this.userModel.find();
     }
 

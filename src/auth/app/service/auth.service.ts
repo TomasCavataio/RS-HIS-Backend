@@ -4,23 +4,17 @@ import { UserService } from 'src/users/app/service/user.service';
 import { JwtService } from '@nestjs/jwt';
 import *  as  bcrypt from 'bcrypt';
 import { JwtPayLoad } from 'src/auth/domain/dto/payload-dto';
+import { User } from 'src/users/domain/models/user.interface';
 
 @Injectable()
 export class AuthService {
-
 
     constructor(private userService: UserService, private jwtService: JwtService) { };
 
     async login(loginUserDto: LoginUserDto) {
         let result = await this.userService.findByEmail(loginUserDto.email);
-        if (!result) throw new NotFoundException();
-        let checkPass = await bcrypt.compare(loginUserDto.password, result.password);
-        if (!checkPass) throw new UnauthorizedException();
-
         return this.createJwtPayload(result);
-
     }
-
 
     createJwtPayload(user) {
         let data = {
@@ -32,13 +26,10 @@ export class AuthService {
             expiresIn: 3600,
             token: jwt
         }
-
     }
 
-
-    async validateUserByJwt(payload: JwtPayLoad) {
+    async validateUserByJwt(payload: JwtPayLoad): Promise<User> {
         let user = await this.userService.findByEmail(payload.email);
         if (user) return user;
-        throw new UnauthorizedException();
     }
 }

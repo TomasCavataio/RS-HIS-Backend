@@ -2,7 +2,7 @@ import { Controller, Post, HttpException, HttpStatus, Logger, Body, Get, UseGuar
 import { UserService } from '../app/service/user.service';
 import { RegisterUserDto } from '../domain/dto/user-dto';
 import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
+import { User } from '../domain/models/user.interface';
 
 @Controller('register')
 export class UsersController {
@@ -11,22 +11,14 @@ export class UsersController {
 
     @Post()
     registerUser(
-        @Body() registerUserDto: RegisterUserDto) {
+        @Body() registerUserDto: RegisterUserDto): Promise<void> {
         return this.userService.registerUser(registerUserDto);
     }
 
-
     @Get()
     @UseGuards(AuthGuard())
-    getAllUsers() {
+    getAllUsers(): Promise<User[]> {
         return this.userService.getAllUsers();
-    }
-
-    @Get('/guard')
-    @UseGuards(AuthGuard())
-    getGuardUser(@Req() req: Request) {
-        Logger.log(JSON.stringify(req['user']));
-        return "Entra";
     }
 
 }
