@@ -7,8 +7,6 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
     catch(exception: any, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
-        // const request = ctx.getRequest();
-        // const status = exception.getStatus();
 
         let status = HttpStatus.INTERNAL_SERVER_ERROR;
 
