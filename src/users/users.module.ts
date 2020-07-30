@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from './ui/users.controller';
+import { UsersController } from './UI/users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { userSchema } from './infrastructure/MongoDB/user.schema';
 import { PassportModule } from '@nestjs/passport';
