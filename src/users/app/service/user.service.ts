@@ -34,8 +34,4 @@ export class UserService {
         return this.userModel.findOne({ email: email });
     }
 
-    async getAllUsers(): Promise<User[]> {
-        return await this.userModel.find();
-    }
-
 }

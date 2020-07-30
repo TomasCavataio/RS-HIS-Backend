@@ -3,7 +3,9 @@ import { UserService } from '../app/service/user.service';
 import { RegisterUserDto } from '../domain/dto/user-dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../domain/models/user.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Registration')
 @Controller('register')
 export class UsersController {
 
@@ -13,12 +15,6 @@ export class UsersController {
     registerUser(
         @Body() registerUserDto: RegisterUserDto): Promise<void> {
         return this.userService.registerUser(registerUserDto);
-    }
-
-    @Get()
-    @UseGuards(AuthGuard())
-    getAllUsers(): Promise<User[]> {
-        return this.userService.getAllUsers();
     }
 
 }
