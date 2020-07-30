@@ -32,6 +32,10 @@ export class AllExceptionsFilter extends BaseExceptionFilter {
             status = HttpStatus.BAD_REQUEST;
         }
 
+        if (exception.status === HttpStatus.UNAUTHORIZED) {
+            status = HttpStatus.UNAUTHORIZED;
+        }
+
         response
             .status(status)
             .json({
