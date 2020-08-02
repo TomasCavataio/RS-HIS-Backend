@@ -11,7 +11,7 @@ You can create your own user, or if you want to you can use this one to login
 
 user: user@gmail.com
 
-password: userpassword12345789
+password: userpassword123456789
 
 ## Documentation
 
