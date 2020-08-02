@@ -19,6 +19,11 @@ You can check out the api documentation at https://rs-his-backend.herokuapp.com/
 
 ![Swagger Demo](swagger.gif)
  
+## Warning
+
+You won't be able to run this backend locally because of a few things (at least not easily).. First of all, this project uses a file .env for sensible stuff such as passwords, token encription and database connection, if you have your own db you can just create this .env file and replace the information.
+If it gets hard to do so, you can always reach to me and I'll help you out
+ 
 ## Installation
 
 ```bash
