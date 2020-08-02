@@ -5,7 +5,7 @@ This is a [Nest](https://github.com/nestjs/nest) framework project, and it provi
 
 It consumes MongoDB data, stored in Atlas cloud.
 
-This backend is deployed in heroku, and the frontend it's on github pages, sou you'll be able to use the project by clicking here: https://tomascavataio.github.io/RS-HIS/
+This backend is deployed on heroku, and the frontend it's on github pages, sou you'll be able to use the project by clicking here: https://tomascavataio.github.io/RS-HIS/
 
 You can create your own user, or if you want to you can use this one to login
 
